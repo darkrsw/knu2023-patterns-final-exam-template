@@ -9,7 +9,7 @@ Your submission must satisfy the following requirements:
 * R5. Check out `test_analyzer1.py` to figure out the output format.
 * R6. Assume that there are **NO** overloaded methods and anonymous classes.
 * R7. Assume that there are nested directories in the input path.
-* R8. The function `collect_uninvoked_methods(...)` takes a path of a directory containing multiple Python source code files, and produces a map. The keys of the map are class names of `Builder` patterns, and the values are a map of `builder methods` and `build methods`, whose values are non-empty sets.
+* R8. The function `collect_builders(...)` takes a path of a directory containing multiple Python source code files, and produces a map. The keys of the map are class names of `Builder` patterns, and the values are a map of `builder methods` and `build methods`, whose values are non-empty sets.
 * R9. The key properties of builder patterns include: (1) at least two member methods returning its own types, and (2) at least one member method without any parameters, which returns a certain type.
 * Refer to the shape of `Builder` patterns here: https://refactoring.guru/design-patterns/builder
  
