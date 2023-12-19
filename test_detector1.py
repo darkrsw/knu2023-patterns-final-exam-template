@@ -27,7 +27,7 @@ def test_detector2():
         "XMan":
             { "builder_methods": {"setxFactor", "setLover"},
               "build_methods": {"getxFactor", "getLover"}
-            },
+            }
     }
 
     result = collect_builders(test_input_path2)
