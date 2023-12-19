@@ -23,7 +23,11 @@ def test_detector2():
         "WolverineBuilder":
             { "builder_methods": {"buildXFactor", "buildLover"},
               "build_methods": {"buildXman", "buildYman"}
-            }
+            },
+        "XMan":
+            { "builder_methods": {"setxFactor", "setLover"},
+              "build_methods": {"getxFactor", "getLover"}
+            },
     }
 
     result = collect_builders(test_input_path2)
