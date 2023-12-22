@@ -1,0 +1,71 @@
+import com.vanniktech.maven.publish.JavaLibrary
+import com.vanniktech.maven.publish.JavadocJar
+
+plugins {
+    id "java-library"
+    id "maven-publish"
+    id "signing"
+    id 'me.tylerbwong.gradle.metalava'
+    id "com.google.protobuf" version "0.8.19"
+}
+
+apply plugin: "com.vanniktech.maven.publish.base"
+
+// See https://github.com/vanniktech/gradle-maven-publish-plugin#base-plugin
+mavenPublishing {
+    configure(new JavaLibrary(new JavadocJar.Javadoc(), true))
+}
+
+publishing {
+    publications.all {
+        artifactId = 'centrifuge-java'
+    }
+}
+
+dependencies {
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation 'com.google.protobuf:protobuf-javalite:3.21.12'
+    implementation 'net.sourceforge.streamsupport:streamsupport-minifuture:1.7.4'
+
+    testImplementation 'junit:junit:4.13.2'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+sourceSets {
+    main {
+        java {
+            String baseDir = protobuf.getProperty("generatedFilesBaseDir").toString()
+            srcDirs "$baseDir/main/java"
+        }
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.20.1"
+    }
+
+    generateProtoTasks {
+        all().configureEach {
+            builtins {
+                java {
+                    option("lite")
+                }
+            }
+        }
+    }
+}
+
+javadoc {
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+
+metalava {
+    hiddenPackages.add("io.github.centrifugal.centrifuge.internal")
+}

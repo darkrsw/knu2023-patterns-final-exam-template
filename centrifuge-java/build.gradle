@@ -1,0 +1,27 @@
+buildscript {
+    repositories {
+        google()
+        gradlePluginPortal()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.2'
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.24.0'
+        classpath "me.tylerbwong.gradle:metalava-gradle:0.2.3"
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        google()
+    }
+}
+
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+apply from: './publish-setup.gradle'

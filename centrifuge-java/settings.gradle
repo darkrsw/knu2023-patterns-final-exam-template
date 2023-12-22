@@ -1,0 +1,5 @@
+rootProject.name = 'centrifuge-java'
+
+include ':centrifuge'
+include ':example'
+include ':demo'
